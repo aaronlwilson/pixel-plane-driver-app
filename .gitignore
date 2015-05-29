@@ -1,0 +1,24 @@
+#Main Ignore
+.DS_Store
+
+processing/PixelPlaneDriverApp/application.windows32
+processing/PixelPlaneDriverApp/application.windows32.zip
+processing/PixelPlaneDriverApp/application.windows32/*
+
+processing/PixelPlaneDriverApp/application.windows64
+processing/PixelPlaneDriverApp/application.windows64.zip
+processing/PixelPlaneDriverApp/application.windows64/*
+
+processing/PixelPlaneDriverApp/application.linux64
+processing/PixelPlaneDriverApp/application.linux64.zip
+processing/PixelPlaneDriverApp/application.linux64/*
+
+processing/PixelPlaneDriverApp/application.linux32
+processing/PixelPlaneDriverApp/application.linux32.zip
+processing/PixelPlaneDriverApp/application.linux32/*
+
+processing/PixelPlaneDriverApp/application.macosx
+processing/PixelPlaneDriverApp/application.macosx.zip
+processing/PixelPlaneDriverApp/application.macosx/*
+
+

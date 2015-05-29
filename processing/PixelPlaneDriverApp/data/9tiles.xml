@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid height="3" width="3">
+  <rabbit id="1" ip="192.168.1.101" mac="00:90:C2:F0:5F:9C">
+    <tile id="1" rotation="0" snapX="0" snapY="0"/>
+    <tile id="2" rotation="0" snapX="1" snapY="0"/>
+    <tile id="3" rotation="0" snapX="2" snapY="0"/>
+    <tile id="4" rotation="0" snapX="2" snapY="1"/>
+    <tile id="5" rotation="0" snapX="1" snapY="1"/>
+    <tile id="6" rotation="0" snapX="0" snapY="1"/>
+    <tile id="7" rotation="0" snapX="0" snapY="2"/>
+    <tile id="8" rotation="0" snapX="1" snapY="2"/>
+    <tile id="9" rotation="0" snapX="2" snapY="2"/>
+  </rabbit>
+</grid>
