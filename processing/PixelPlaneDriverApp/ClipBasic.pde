@@ -70,14 +70,14 @@ class ClipBasic extends AbstractClip {
   public int[] drawNode(Node node) {
 
     //FOR QUICKLY TESTING TILES, JUST ROTATE ALL RED, GREEN, BLUE
-/*
+
     super.nodestate[0] = c[count + 1]; //b
     super.nodestate[1] = c[count + 0]; //r
     super.nodestate[2] = c[count + 2]; //g
     return super.nodestate; // RGBXY
       
-      */
       
+      /*
     //PUT BACK this bit for production
     colorMode(HSB, 100);  // Use HSB with scale of 0-100
     _color = color(hue, saturation, brightness);
@@ -88,7 +88,7 @@ class ClipBasic extends AbstractClip {
     super.nodestate[2] = int(Utils.getB(_color));
     return super.nodestate; // RGBXY
     
-    
+    */
   } 
   
 }

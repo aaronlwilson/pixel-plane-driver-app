@@ -239,7 +239,7 @@ class ChannelCanvas extends Canvas {
     AbstractClip clip = new AbstractClip("Abstract Clip", namespace);
     switch(clipClass){
       case NODESCAN:clip      = new ClipNodeScan(clipNames[NODESCAN], namespace);break;
-      case COLORWASH:clip     = new ClipColorWash(clipNames[COLORWASH], namespace);break;
+      case COLORWASH:clip     = new ClipBasic(clipNames[COLORWASH], namespace);break;
       case SCREENCAPTURE:clip = new ClipScreenCapture(clipNames[SCREENCAPTURE], namespace);break;
       case ANIMATEDGIF:clip   = new ClipAnimatedGif(clipNames[ANIMATEDGIF], namespace);break;
       case TEXTSCROLL:clip    = new ClipText(clipNames[TEXTSCROLL], namespace);break;

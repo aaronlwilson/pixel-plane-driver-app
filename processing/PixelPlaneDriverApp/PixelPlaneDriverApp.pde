@@ -144,9 +144,6 @@ void setup() {
 }//end setup
 
 
-/**
- * draw
- */
 void draw() {
   //update frame
   frame++;
@@ -160,7 +157,7 @@ void draw() {
 
 //GENERAL CP5 Handlers. I'm catching all events here at the top
 void controlEvent(ControlEvent theEvent) {
-
+ 
   if (theEvent.isGroup()) {
     // check if the Event was triggered from a ControlGroup, Tab, or Controller
     //println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());

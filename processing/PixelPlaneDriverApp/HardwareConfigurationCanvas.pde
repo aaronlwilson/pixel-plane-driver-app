@@ -22,7 +22,7 @@ class HardwareConfigurationCanvas extends Canvas {
        .plugTo(this,"rabbitSearch")
        .moveTo("Hardware Configuration");
        
-    cp5.addButton("DEMO CONTROLLER")
+    cp5.addButton("ADD CONTROLLER")
        .setValue(0)
        .setPosition(130,45)
        .setSize(80,25)
@@ -57,12 +57,7 @@ class HardwareConfigurationCanvas extends Canvas {
                .setPosition(10,75)
                .setWidth(200)
                .moveTo("Hardware Configuration");
-                 
-     // use Accordion.MULTI to allow multiple groupa to be open at a time.
-     //accordion.setCollapseMode(Accordion.MULTI);
-   
   }
- 
  
   public void setup(PApplet theApplet) {
     
@@ -81,7 +76,7 @@ class HardwareConfigurationCanvas extends Canvas {
         rect(0, 540, 220, 60);
         fill(255,128,0);
         rect(0, 30, 1000, 5); 
-      }     
+      }
       
       //DRAW snappy grid for dropping tiles 
       if(gridSizeX > 0 && gridSizeY > 0){
@@ -115,8 +110,9 @@ class HardwareConfigurationCanvas extends Canvas {
         Rabbit rabbit = stateManager.rabbitArray[i];
         cp5.remove("TEST TILES "+rabbit.id);
         cp5.remove("TILE NUMBER "+rabbit.id);
+        cp5.remove("IP_FIELD "+rabbit.id);
         cp5.remove("IP_LABEL "+rabbit.id);
-        cp5.remove("MAC_LABEL "+rabbit.mac);
+        cp5.remove("MAC_LABEL "+rabbit.id);
         cp5.remove("RABBIT "+rabbit.id);
         rabbit.removeAllTiles();
         rabbit = null;
@@ -127,11 +123,11 @@ class HardwareConfigurationCanvas extends Canvas {
     return l;
   } //end deleteAllRabbits
     
-  //this is an echo back from the IP Discovery service
-  public Rabbit createRabbit(String ip, String mac){
+  //this is an echo back from the IP Discovery service, also called by "ADD CONTROLLER" button, and parseXML function
+  public Rabbit createRabbit(String ip, String mac, boolean canEdit){
     //first see if we already have a rabbit loaded with tiles placed, 
     //we can compare the MAC address and update the IP if DHCP changed it
-    if(stateManager.rabbitArray.length > 0){
+    if(stateManager.rabbitArray.length > 0 && canEdit == false){
       for(Rabbit r : stateManager.rabbitArray){
         if(r.mac.equals(mac)){
           //just update the ip of our rabbit instead of making a new one.
@@ -153,15 +149,16 @@ class HardwareConfigurationCanvas extends Canvas {
     
     Rabbit r = new Rabbit(ip, id, mac);
     rArray[0] = r;
-    accordion.addItem(createRabbitGroup(rArray[0]));   
+    accordion.addItem(createRabbitGroup(r, canEdit));   
                       
     stateManager.rabbitArray = (Rabbit[]) concat(stateManager.rabbitArray, rArray);
      
     accordion.open(0);
     return r;
+    
   }//end createRabbit
   
-  public Group createRabbitGroup(Rabbit rabbit){
+  public Group createRabbitGroup(Rabbit rabbit, boolean canEdit){
     
     Group g = cp5.addGroup("RABBIT "+rabbit.id)
                   .setBackgroundColor(color(0, 64))
@@ -170,32 +167,50 @@ class HardwareConfigurationCanvas extends Canvas {
                   .setBackgroundHeight(40);
      
     g.addListener(new RabbitGroupControlListener());            
-                  
-    Textlabel ipTextLabel = cp5.addTextlabel("IP_LABEL "+rabbit.id)
-                      .setText("IP: " + rabbit.ip)
-                      .setPosition(5,5)
-                      .setColorValue(0xffffffff)
-                      .setFont(createFont("PT Mono",16))
-                      .moveTo(g);   
-                      
-    Textlabel macTextLabel = cp5.addTextlabel("MAC_LABEL "+rabbit.id)
+          
+          
+    if(canEdit == true){ 
+      //this is the result of "ADD CONTROLLER BUTTON"
+      Textfield ipField = cp5.addTextfield("IP_FIELD "+rabbit.id)
+       .setPosition(10,10)
+       .setSize(180,20)
+       .setFont(font)
+       .moveTo(g)
+       .setId(rabbit.id)
+       .setAutoClear(false)
+       .setFocus(true);  
+      
+      
+      ipField.setText(rabbit.ip);
+      ipField.getCaptionLabel().setText("Enter IP address"); 
+    
+    }else{                 
+      Textlabel ipTextLabel = cp5.addTextlabel("IP_LABEL "+rabbit.id)
+                        .setText("IP: " + rabbit.ip)
+                        .setPosition(5,5)
+                        .setColorValue(0xffffffff)
+                        .setFont(createFont("PT Mono",16))
+                        .moveTo(g);   
+                        
+      Textlabel macTextLabel = cp5.addTextlabel("MAC_LABEL "+rabbit.id)
                       .setText("MAC: " + rabbit.mac)
                       .setPosition(5,25)
                       .setColorValue(0xffffffff)
                       .setFont(createFont("PT Mono",14))
-                      .moveTo(g);
+                      .moveTo(g);                 
+    }
          
     Textfield tileNumberField = cp5.addTextfield("TILE NUMBER "+rabbit.id)
-       .setPosition(10, 50)
-       .setSize(50,30)
+       .setPosition(10, 60)
+       .setSize(50,20)
        .setFont(font)
        .moveTo(g)
        .setFocus(false);   
-    tileNumberField.getCaptionLabel().setText("number of tiles");       
+    tileNumberField.getCaptionLabel().setText("number of tiles   ( 9 max )");       
   
     Button testButton = cp5.addButton("TEST TILES "+rabbit.id)
-       .setPosition(90,50)
-       .setSize(80,30)
+       .setPosition(110,60)
+       .setSize(80,20)
        .moveTo(g)
        .setId(rabbit.id);
     testButton.getCaptionLabel().setText("test tiles"); 
@@ -238,7 +253,7 @@ class HardwareConfigurationCanvas extends Canvas {
     });
        
     return g;
-  }
+  }//end createRabbitGroup
   
   public void rabbitSearch() {
     println("RABBIT SEARCH");
@@ -253,7 +268,7 @@ class HardwareConfigurationCanvas extends Canvas {
   }// end rabbitSearch
   
   public void rabbitDemo() {
-    hardwareCanvas.createRabbit("X.X.X.X", "xx:xx:xx:xx");
+    createRabbit("X.X.X.X", "", true);
   }// end rabbitDemo
   
   public Tile createTile(Rabbit rabbit, int id, int xPos, int yPos){
@@ -310,7 +325,7 @@ class HardwareConfigurationCanvas extends Canvas {
 
     for(int j=0; j<rabbits.length; j++){  
       //println(rabbits[j].getString("ip"));
-      Rabbit rabbit = createRabbit(rabbits[j].getString("ip"), rabbits[j].getString("mac"));
+      Rabbit rabbit = createRabbit(rabbits[j].getString("ip"), rabbits[j].getString("mac"), false);
       
       XML[] tiles = rabbits[j].getChildren("tile");
       stateManager.rabbitArray[j].tileArray = new Tile[tiles.length];

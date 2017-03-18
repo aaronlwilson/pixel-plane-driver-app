@@ -40,7 +40,7 @@ class NetworkManager  {
     // create a new datagram connection on 6000
     // and wait for incomming message
     udp = new UDP( app, myPort );
-    udp.setBuffer(2000);
+    udp.setBuffer(10000);
     
     udp.log( false );     // <-- printout the connection activity, but performance is affected
     udp.listen( true );
@@ -164,6 +164,8 @@ class NetworkManager  {
      // send the message for 1 tile
      String ip = tile.parentRabbit.ip;
      
+     //hack for 1st gen tiles
+     //ip ="192.168.1.120";
      if(app.BROADCAST && ip!="X.X.X.X"){
        udp.send( data, ip, rabbitPort );
      }
@@ -261,7 +263,7 @@ class NetworkManager  {
     
     if(port == rabbitPort){
       //got an echo back from a rabbit (master tile), add to model and create GUI
-      hardwareCanvas.createRabbit(ip, macaddy);
+      hardwareCanvas.createRabbit(ip, macaddy, false);
     }
   }
 
