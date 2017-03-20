@@ -3,7 +3,7 @@ import controlP5.*;
 import hypermedia.net.*;
 import gifAnimation.Gif;
 import codeanticode.syphon.*;
-import krister.Ess.*;
+//import krister.Ess.*;
 import processing.opengl.*;
 
 
@@ -23,7 +23,7 @@ public HardwareConfigurationCanvas hardwareCanvas;
 public AnimationControlCanvas animationCanvas;
 public StateManager stateManager;
 public NetworkManager networkManager;
-public AudioManager audioManager;
+//public AudioManager audioManager;
 
 public int viewId;
 public int frame;
@@ -50,7 +50,7 @@ void setup() {
   app = this;
   stateManager     = new StateManager();
   networkManager   = new NetworkManager();
-  audioManager     = new AudioManager();
+  //audioManager     = new AudioManager();
   
   cp5 = new ControlP5(this);
   cp5.addFrameRate().setInterval(10).setPosition(920, 4).moveTo("global");
@@ -247,7 +247,9 @@ public void receive( byte[] data, String ip, int port ) {  // <-- extended handl
   networkManager.receive(data, ip, port);
 }
 
+/* PUT BACK
 //ESS handler, pass it along
 public void audioInputData(AudioInput theInput) {
   audioManager.audioInputData(theInput);
 }
+*/
