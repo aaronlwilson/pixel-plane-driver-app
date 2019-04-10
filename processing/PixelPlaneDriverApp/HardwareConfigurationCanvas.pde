@@ -63,7 +63,7 @@ class HardwareConfigurationCanvas extends Canvas {
     
   }  
 
-  public void draw(PApplet p) { 
+  public void draw(PGraphics p) { 
       if(viewId == 1){
         //basic background colors
         noStroke();

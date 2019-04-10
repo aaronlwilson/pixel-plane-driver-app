@@ -58,6 +58,9 @@ class ClipSyphon extends AbstractClip {
   }
 
   public void run() {
+    //depricated
+    
+    /*
     if (client.available()) {
       // The first time getImage() is called with 
       // a null argument, it will initialize the PImage
@@ -81,6 +84,7 @@ class ClipSyphon extends AbstractClip {
       offsetX = (p4-50)*(scaleRatio/1.5);
       offsetY = (p5-50)*(scaleRatio/1.5);
     }
+    */
   }
 
   public void die() {

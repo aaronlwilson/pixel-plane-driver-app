@@ -48,8 +48,12 @@ class Tile extends Controller<Tile> {
       public void controlEvent(CallbackEvent event) {
         if (event.getAction()==ControlP5.ACTION_RELEASED) {
           Tile tile = (Tile)event.getController();
-          int x=int(tile.getPosition().x);
-          int y=int(tile.getPosition().y);
+          
+          //int x=int(tile.getPosition().x); //depricated
+          //int y=int(tile.getPosition().y); //depricated
+          
+          int x= 1;
+          int y= 1;
 
           //if its already in the tileGrid, remove it
           int[] point = Utils.find2DIndex(stateManager.tileGrid, tile);
@@ -167,8 +171,12 @@ class Tile extends Controller<Tile> {
   }//end setup
   
   public void draw(PApplet p) { 
-    int x=int(getPosition().x);
-    int y=int(getPosition().y);
+    //int x=int(getPosition().x); //depricated
+    //int y=int(getPosition().y); //depricated
+    
+    int x=1;
+    int y=1;
+    
     int w=int(getWidth());
     int h=int(getHeight());
     

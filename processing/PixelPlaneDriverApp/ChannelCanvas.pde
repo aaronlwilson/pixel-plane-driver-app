@@ -205,9 +205,11 @@ class ChannelCanvas extends Canvas {
     ddl.setBackgroundColor(color(190));
     ddl.setItemHeight(20);
     ddl.setBarHeight(25);
-    ddl.captionLabel().set("CHOOSE A CLIP");
-    ddl.captionLabel().style().marginTop = 10;
-    ddl.captionLabel().style().marginLeft = 10;
+    
+    //ddl.captionLabel().set("CHOOSE A CLIP"); //depricated
+    //ddl.captionLabel().style().marginTop = 10; //depricated
+    //ddl.captionLabel().style().marginLeft = 10; //depricated
+    
     ddl.moveTo("Animation Control");
     
     int numClips = clipNames.length;
@@ -256,8 +258,10 @@ class ChannelCanvas extends Canvas {
       currentClip.p1 = pKnob1.getValue();
       currentClip.p2 = pKnob2.getValue();
       currentClip.p3 = pKnob3.getValue();
-      currentClip.p4 = slider2D.arrayValue()[0];
-      currentClip.p5 = slider2D.arrayValue()[1];
+      
+      //currentClip.p4 = slider2D.arrayValue()[0]; //depricated
+      //currentClip.p5 = slider2D.arrayValue()[1]; //depricated
+      
       currentClip.p6 = sliderX.getValue();
       currentClip.p7 = sliderY.getValue();
       //println(namespace + " NEW CLIP: " + currentClip.clipName);
@@ -349,8 +353,8 @@ class ChannelCanvas extends Canvas {
   }
   
   void onSlider2DChange() {
-    if(currentClip != null) currentClip.p4 = slider2D.arrayValue()[0];
-    if(currentClip != null) currentClip.p5 = slider2D.arrayValue()[1];
+    //if(currentClip != null) currentClip.p4 = slider2D.arrayValue()[0]; //depricated
+    //if(currentClip != null) currentClip.p5 = slider2D.arrayValue()[1]; //depricated
   }
   
   void onSliderXChange() {
@@ -382,7 +386,7 @@ class ChannelCanvas extends Canvas {
     //constructNewClip(0);
   }//end setup 
 
-  public void draw(PApplet p) {
+  public void draw(PGraphics p) {
     showText = cp5.get(Textfield.class, namespace+".textInput").getText();
     
     if(currentClip != null){

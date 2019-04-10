@@ -29,7 +29,7 @@ class AnimationControlCanvas extends Canvas {
     textFont(font);
   }  
 
-  public void draw(PApplet p) {
+  public void draw(PGraphics p) {
     if(viewId == 2){
       //basic background colors
       noStroke();

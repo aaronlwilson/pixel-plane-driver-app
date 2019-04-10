@@ -45,6 +45,7 @@ public static int MAXTILES = 9;
 void setup() {
   size(1000, 600);
   frameRate( 60 );   //60 frames/sec max
+  pixelDensity(2);
   
   //init singletons
   app = this;
